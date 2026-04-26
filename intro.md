@@ -1,328 +1,338 @@
-# Sistem Persamaan Linear (SPL)
-## Apa itu Sistem Persamaan Linear?
-**Sistem persamaan linear** merupakan salah satu konsep penting dalam matematika yang memiliki peran besar di berbagai bidang kehidupan. Tidak hanya dalam dunia akademik, konsep ini juga banyak diterapkan dalam ekonomi, teknik, ilmu komputer, hingga analisis data. 
-**Sistem Persamaan Linear** adalah sekumpulan dua atau lebih persamaan yang memiliki variabel yang sama dan derajat satu. Persamaan linear disebut “linear” karena grafiknya membentuk garis lurus. 
+# INVERS
+## Diketahui:
+$A =
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+2 & -1 & 1 & -1 \\
+1 & 2 & -1 & 1 \\
+3 & -1 & 2 & 1
+\end{bmatrix}
+\quad
+B =
+\begin{bmatrix}
+10 \\
+-1 \\
+6 \\
+11
+\end{bmatrix}
+$
 
-**Contoh Umum Sistem Persamaan Linear:**
-1. 2x + 3y = 6
-2. x – y = 2<p>Kedua persamaan ini membentuk sistem dua variabel, yaitu x dan y. Tujuan dari sistem ini adalah mencari nilai x dan y yang memenuhi kedua persamaan secara bersamaan.</p>
+## Mencari Invers Matriks A
+### Langkah 1 Rumus Invers
+$A^{-1} = \frac{1}{\det(A)} \cdot \text{adj}(A)$
 
-**Bentuk Umum Sistem Persamaan Linear:**
-1. a₁x + b₁y = c₁
-2. a₂x + b₂y = c₂<p>Bentuk ini sangat berguna ketika kita ingin menyelesaikan sistem persamaan dengan metode aljabar linear seperti eliminasi Gauss atau matriks invers.</p>
+### Langkah 2 Hitung Determinan
+### Kita ekspansi baris pertama:
+det(A)=1C11​+1C12​+1C13​+1C14​
 
-**Jenis-jenis Sistem Persamaan Linear** <p>Sistem Persamaan Linier dibedakan menjadi 3 jenis berdasarkan jumlah variabelnya:</p>
-1. Sistem Persamaan Linear Dua Variabel (SPLDV), Contoh: x + y = 10
-2. Sistem Persamaan Linear Tiga Variabel (SPLTV), Contoh: x + 2y + z = 6
-3. Sistem Persamaan Linear n Variabel (SPLNV), Sistem yang memiliki lebih dari tiga variabel, umumnya digunakan dalam bidang teknik dan data science.
+dengan
 
-## Apa Solusi Sistem Persamaan Linear?
-**Solusi Sistem Persamaan LInear** adalah setiap n-tuple nilai (s1, s2,...,sn) yang memenuhi persamaan linear. Misalnya (−1, -1) merupakan solusi dari persamaan linear x + 3y = -4 dengan bukti -1 + (3 x -1) = -1 + (-3) = -4
-<p>Secara umum, untuk setiap sistem persamaan linear terdapat tiga kemungkinan solusi:
+Cij​=(−1)i+jMij​
+
+di mana Mij​ adalah minor.
+
+Jadi kita cari minor satu-satu dari baris pertama.
+
+## Cari determinan dari baris pertama
+det(A)=−3+9+11−4=13
+
+## Minor
+
+$
+\text{Minor } M_{11}
+$
+
+$
+M_{11}=
+\begin{vmatrix}
+-1 & 1 & -1\
+2 & -1 & 1\
+-1 & 2 & 1
+\end{vmatrix}
+$
 
 
-1. **Solusi Tunggal (unik):** Dalam solusi ini, hanya ada satu himpunan solusi spesifik. Secara geometris, ini berarti bahwa n bidang yang ditentukan oleh setiap persamaan dari sistem linear semuanya berpotongan pada satu titik unik di ruang yang ditentukan oleh variabel-variabel sistem tersebut (Garis berpotongan).
+<h1>Menghitung determinan matrik dengan menggunakan rumus expansi baris</h1>
 
-    **Contoh:**   
+$\[
+\sum_{k=1}^{n} (-1)^{i+k} a_{ik} M_{ik}
+\]$
 
-    $\begin{cases}
-    x + 2y = 4 \\
-    3x - y = 5
-    \end{cases}$
+<br>dengan \( M_{ij} \) adalah minor dari matriks \( A \) dan
 
-    **Langkah-langkah Operasi Baris Elementer (OBE):**
-    1. Bentuk Matriks:
-        
-        $\left[
-        \begin{array}{cc|c}
-        1 & 2 & 4 \\
-        3 & -1 & 5
-        \end{array}
-        \right]$
-    2. Hilangkan elemen di bawah pivot pertama
+$\[
+M_{ij} = \det A_{ij}
+\]$
 
-        Gunakan: R2 = R2 - 3R1
+<br>\( A_{ij} \) adalah submatrik dengan menghapus baris \( i \) dan kolom \( j \) dari matriks \( A_{m \times n} \) dengan \( 1 \le i,j \le n \).
 
-        Matriks menjadi:
-
-        $\left[
-        \begin{array}{cc|c}
-        1 & 2 & 4 \\
-        0 & -7 & -7
-        \end{array}
-        \right]$
-    3. Jdikan pivot kedua bernilai 1
-
-        $\left[
-        \begin{array}{cc|c}
-        1 & 2 & 4 \\
-        0 & 1 & 1
-        \end{array}
-        \right]$
-
-    4. Hilangkan elemen di atas pivot kedua
-
-        Gunakan: R1 = R1 - 2R2
-
-        Matriks akhir (bentuk eselon tereduksi):
-
-        $\left[
-        \begin{array}{cc|c}
-        1 & 0 & 2 \\
-        0 & 1 & 1
-        \end{array}
-        \right]$
-    5. Hasil
-
-        X = 2  Y = 1
+\end{document}
     
-    6. Kode Python:
-
-        ```python
-        import numpy as np
-
-        # Matriks koefisien
-        A = np.array([
-            [1, 2],
-            [3, -1]
-        ], dtype=float)
-
-        # Matriks konstanta
-        B = np.array([4, 5], dtype=float)
-
-        # Bentuk matriks augmentasi
-        aug = np.hstack((A, B.reshape(-1, 1)))
-
-        print("Matriks awal:")
-        print(aug)
-
-        # 1️⃣ R2 = R2 - 3R1
-        aug[1] = aug[1] - 3 * aug[0]
-
-        print("\nSetelah R2 = R2 - 3R1:")
-        print(aug)
-
-        # 2️⃣ R2 = (-1/7) R2
-        aug[1] = (-1/7) * aug[1]
-
-        print("\nSetelah R2 = (-1/7) R2:")
-        print(aug)
-
-        # 3️⃣ R1 = R1 - 2R2
-        aug[0] = aug[0] - 2 * aug[1]
-
-        print("\nSetelah R1 = R1 - 2R2:")
-        print(aug)
-
-        # Ambil solusi
-        x = aug[0, -1]
-        y = aug[1, -1]
-
-        print("\nKesimpulan: Sistem memiliki solusi tunggal.")
-        print(f"x = {x}")
-        print(f"y = {y}")
-    7. Geogebra
-        
-        <iframe src="https://www.geogebra.org/calculator/kfracqtx?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
-       
+<h2>1. Determinan Matriks 2x2</h2>
     
+<p>
+$\[
+A=\begin{pmatrix}-7 & -5 \\ 1 & 4\end{pmatrix}
+\]$
+</p>
 
-2. **Tidak Ada Solusi:** Persamaan-persamaan tersebut disebut tidak konsisten dan menentukan n bidang di ruang angkasa yang tidak berpotongan atau tumpang tindih. Tidak mungkin untuk menentukan himpunan solusi yang memenuhi semua persamaan sistem tersebut (Garis sejajar).
+<p>Rumus:</p>
+<p>
+$\[
+\det(A)=ad-bc
+\]$
+</p>
 
-    **Contoh:**
+<p>Perhitungan:</p>
+<p>
+$\[
+\det(A)=(-7)(4)-(-5)(1)
+\]
+$</p>
 
-    $\begin{cases}
-    3x - 2y = 2 \\
-    3x - 2y = -2
-    \end{cases}$
+<p>
+$\[
+=-28+5=-23
+\]
+$</p>
 
-    **Langkah-langkah Operasi Baris Elementer (OBE):**
-    1. Bentuk Matriks:
-
-        $\left[
-        \begin{array}{cc|c}
-        3 & -2 & 2 \\
-        3 & -2 & -2
-        \end{array}
-        \right]$
-
-    2. Hilangkan elemen di bawah pivot pertama
-
-        Gunakan: R2 = R2 - R1
-
-        Matriks menjadi:
-
-        $\left[
-        \begin{array}{cc|c}
-        3 & -2 & 2 \\
-        0 & 0 & -4
-        \end{array}
-        \right]$
-
-    3. Interpretasi Baris Kedua
-
-        Baris kedua menyatakan:
-
-        $0x + 0y = -4$
-        $0 = -4$
-        Ini adalah *kontradiksi*, karena tidak mungkin benar.
+<h2>2. Determinan Matriks 3x3</h2>   
     
-    4. Hasil
-        
-        Karena muncul baris:
+<p>
+$\[
+A=\begin{pmatrix}
+0 & 2 & -3\\
+1 & -2 & -1\\
+0 & 0 & 1
+\end{pmatrix}
+\]$
+</p>
 
-        $0 = -4$
+<p>Ekspansi baris pertama:</p>
 
-        Maka ini **Tidak Ada Solusi**. Secara geometri, dua garis memiliki gradien sama tetapi berbeda titik potong → garis sejajar dan tidak berpotongan.
+<p>
+$\[
+\det(A)=0 + (-1)^{1+2}(2)
+\begin{vmatrix}1 & -1\\0 & 1\end{vmatrix}
++ (-1)^{1+3}(-3)
+\begin{vmatrix}1 & -2\\0 & 0\end{vmatrix}
+\]$
+</p>
 
-    5. Kode Python:
-        ```python
-        import numpy as np
+<p>Hitung minor:</p>
 
-        # Matriks koefisien
-        A = np.array([
-            [3, -2],
-            [3, -2]
-        ], dtype=float)
+<p>
+$\[
+= (-1)(2)(1\cdot1-(-1)\cdot0) + (1)(-3)(0)
+\]
+$</p>
 
-        # Matriks konstanta
-        B = np.array([2, -2], dtype=float)
+<p>
+$\[
+=-2
+\]$
+</p>
 
-        # Gabungkan menjadi matriks augmentasi
-        aug = np.hstack((A, B.reshape(-1, 1)))
+<h2>3. Determinan Matriks 4x4</h2>
 
-        print("Matriks awal:")
-        print(aug)
+<p>
+$\[
+A=
+\begin{pmatrix}
+1 & -3 & 1 & 1\\
+-3 & 1 & 1 & 1\\
+1 & 1 & -3 & 1\\
+1 & 1 & 1 & -3
+\end{pmatrix}
+\]
+$</p>
 
-        # Operasi Baris Elementer
-        aug[1] = aug[1] - aug[0]   # R2 = R2 - R1
+<p>Jumlah setiap baris:</p>
 
-        print("\nSetelah OBE (R2 = R2 - R1):")
-        print(aug)
+<p>
+$\[
+1-3+1+1=0
+\]$
+</p>
 
-        # Cek jenis solusi
-        if np.allclose(aug[1, :-1], 0) and not np.isclose(aug[1, -1], 0):
-            print("\nKesimpulan: Sistem tidak memiliki solusi (inkonsisten).")
-        elif np.allclose(aug[1], 0):
-            print("\nKesimpulan: Sistem memiliki tak hingga solusi.")
-        else:
-            print("\nKesimpulan: Sistem memiliki solusi tunggal.")
+<p>Karena ada baris yang saling bergantung (linear dependent):</p>
 
-    6. Geogebra
+<p>
+$\[
+\det(A)=0
+\]
+$</p>
 
-        <iframe src="https://www.geogebra.org/calculator/kfracqtx?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
-        
-    
+<p><b>Sifat Determinan: Kalau ada baris/kolom yang saling bergantung (linear dependent) → determinan = 0</b></p>
+<p>Baris 1:  1−3+1+1=0</p>
+<p>Baris 2:  −3+1+1+1=0</p>
+<p>Baris 3:   1+1−3+1=0</p>
+<p>Baris 4: 1+1+1−3=0</p>
+<p>Semua baris jumlahnya 0</p>
+<p>Jadi det(A) = 0</p>   
+<h1>Menggunakan rumus matriks adjoin untuk menghitung invers dari matriks berikut dengan rumus</h1>
 
-3. **Solusi Tak Terhingga:** kondisi ketika suatu sistem persamaan linier memiliki banyak solusi yang tidak terbatas jumlahnya(Garis berimpit).
+<p>
+$\[
+(\mathrm{adj}\, A)_{ij} = (-1)^{i+j} M_{ji}
+\]$
+</p>
 
-    **Contoh:**
+<p>
+$\[
+A^{-1} = \frac{1}{\det A} \, \mathrm{adj}\, A
+\]$
+</p>
 
-    $\begin{cases}
-    x + y + z = 2 \\
-    2x + 2y + 2z = 4
-    \end{cases}$
+<h2>4. Invers Matriks 2x2 (Metode Adjoin)</h2>
 
-    **Langkah-langkah Operasi Baris Elementer (OBE):**
-    1. Bentuk Matriks:
+<p>
+$\[
+A=\begin{pmatrix}-7 & -5 \\ 1 & 4\end{pmatrix}
+\]$
+</p>
 
-        $\left[
-        \begin{array}{ccc|c}
-        1 & 1 & 1 & 2 \\
-        2 & 2 & 2 & 4
-        \end{array}
-        \right]$
+<p>Langkah 1: Determinan</p>
+<p>
+$\[
+\det(A)=(-7)(4)-(-5)(1)=-28+5=-23
+\]$
+</p>
 
-    2. Hilangkan elemen di bawah pivot pertama
+<p>Langkah 2: Minor</p>
+<p>
+$\[
+M_{11}=4,\quad M_{12}=1,\quad M_{21}=-5,\quad M_{22}=-7
+\]$
+</p>
 
-        Gunakan: R2 = R2 - 2R1
+<p>Langkah 3: Kofaktor</p>
+<p>
+$\[
+C_{11}=4,\quad C_{12}=-1,\quad C_{21}=5,\quad C_{22}=-7
+\]$
+</p>
 
-        Matriks menjadi:
+<p>Langkah 4: Adjoin (transpose kofaktor)</p>
+<p>
+$\[
+\text{adj}(A)=\begin{pmatrix}4 & 5 \\ -1 & -7\end{pmatrix}
+\]$
+</p>
 
-        $\left[
-        \begin{array}{ccc|c}
-        1 & 1 & 1 & 2 \\
-        0 & 0 & 0 & 0
-        \end{array}
-        \right]$
-    
-    3. Interpretasi Baris Kedua
+<p>Langkah 5: Invers</p>
+<p>
+$\[
+A^{-1}=\frac{1}{-23}
+\begin{pmatrix}4 & 5 \\ -1 & -7\end{pmatrix}
+\]$
+</p>
 
-        Baris kedua menyatakan:
-        $0x + 0y + 0z = 0$
+<h2>5. Invers Matriks 3x3 (Metode Adjoin)</h2>
 
-        Artinya tidak ada informasi baru → sistem memiliki variabel bebas. 
-        
-        Dari baris pertama:
-        $x + y + z = 2$
+<p>
+$\[
+A=\begin{pmatrix}
+0 & 2 & -3\\
+1 & -2 & -1\\
+0 & 0 & 1
+\end{pmatrix}
+\]
+$</p>
 
-        Misalkan:
+<p>Langkah 1: Determinan</p>
+<p>
+$\[
+\det(A)=-2
+\]
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,$</p>
 
-        $y = s, \quad z = t$
+<p>Langkah 2: Matriks Minor</p>
 
-        Maka:
+<p>\[
+M_{11}=\begin{vmatrix}-2 & -1\\0 & 1\end{vmatrix}=-2
+\]</p>
 
-        $x = 2 - s - t$
+<p>\[
+M_{12}=\begin{vmatrix}1 & -1\\0 & 1\end{vmatrix}=1
+\]</p>
 
-    4. Hasil (Bentuk Solusi Parametrik):
+<p>\[
+M_{13}=\begin{vmatrix}1 & -2\\0 & 0\end{vmatrix}=0
+\]</p>
 
-        $\begin{cases}
-        x = 2 - s - t \\
-        y = s \\
-        z = t
-        \end{cases}
-        \quad \text{dengan } s,t \in \mathbb{R}$
+<p>Langkah 3: Matriks Kofaktor</p>
 
-        Karena s dan t bebas, **maka solusinya tak terhingga banyaknya.**
-    
-    5. Kode Python:
+<p>\[
+C=
+\begin{pmatrix}
+-2 & -1 & 0\\
+2 & 0 & 0\\
+-5 & -3 & -2
+\end{pmatrix}
+\]</p>
 
-         ```python
-        import numpy as np
+<p>Langkah 4: Adjoin (transpose)</p>
 
-        # Matriks koefisien
-        A = np.array([
-            [1, 1, 1],
-            [2, 2, 2]
-        ], dtype=float)
+<p>\[
+\text{adj}(A)=
+\begin{pmatrix}
+-2 & 2 & -5\\
+-1 & 0 & -3\\
+0 & 0 & -2
+\end{pmatrix}
+\]</p>
 
-        # Matriks konstanta
-        B = np.array([2, 4], dtype=float)
+<p>Langkah 5: Invers</p>
 
-        # Bentuk matriks augmentasi
-        aug = np.hstack((A, B.reshape(-1, 1)))
+<p>\[
+A^{-1}=\frac{1}{-2}
+\begin{pmatrix}
+-2 & 2 & -5\\
+-1 & 0 & -3\\
+0 & 0 & -2
+\end{pmatrix}
+\]</p>
 
-        print("Matriks awal:")
-        print(aug)
+<p>\[
+=
+\begin{pmatrix}
+1 & -1 & \frac{5}{2}\\
+\frac{1}{2} & 0 & \frac{3}{2}\\
+0 & 0 & 1
+\end{pmatrix}
+\]</p>
 
-        # 1️⃣ R2 = R2 - 2R1
-        aug[1] = aug[1] - 2 * aug[0]
+<h2>6. Invers Matriks 4x4</h2>
 
-        print("\nSetelah R2 = R2 - 2R1:")
-        print(aug)
+<p>\[
+A=
+\begin{pmatrix}
+1 & -3 & 1 & 1\\
+-3 & 1 & 1 & 1\\
+1 & 1 & -3 & 1\\
+1 & 1 & 1 & -3
+\end{pmatrix}
+\]</p>
 
-        # Cek jenis solusi
-        if np.allclose(aug[1], 0):
-            print("\nKesimpulan: Sistem memiliki tak hingga solusi (variabel bebas).")
-            
-            print("\nBentuk persamaan tersisa:")
-            print("x + y + z = 2")
-            
-            print("\nMisalkan:")
-            print("y = s")
-            print("z = t")
-            
-            print("\nMaka:")
-            print("x = 2 - s - t")
-            
-            print("\nBentuk solusi parametrik:")
-            print("x = 2 - s - t")
-            print("y = s")
-            print("z = t")
-            print("dengan s, t ∈ R")
-        else:
-            print("\nSistem bukan kasus tak hingga solusi.")
-    6. Geogebra
+<p>Langkah 1: Cek determinan</p>
 
-        <iframe src="https://www.geogebra.org/calculator/nygupfj2?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
-       
+<p>\[
+1-3+1+1=0
+\]</p>
+
+<p>Baris saling bergantung (linear dependent)</p>
+
+<p>\[
+\det(A)=0
+\]</p>
+
+<p>Langkah 2: Kesimpulan</p>
+
+<p>\[
+A^{-1} \text{ tidak ada karena determinan = 0}
+\]</p>
+
+
+
+	​
